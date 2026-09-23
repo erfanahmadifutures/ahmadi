@@ -1,0 +1,213 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * «احمدی» — Kinetic glass cockpit design system.
+ * Dark ink surfaces, volt (teal) accent, amber warning, coral danger.
+ * All colors are oklch semantic tokens. Never hardcode colors in components.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+
+  --font-sans: var(--font-vazir);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ice: var(--ice);
+  --color-ice-dim: var(--ice-dim);
+  --color-ice-faint: var(--ice-faint);
+
+  --color-chart-1: var(--primary);
+  --color-chart-2: var(--warning);
+  --color-chart-3: var(--destructive);
+  --color-chart-4: var(--ice-dim);
+  --color-chart-5: var(--ice-faint);
+
+  --color-sidebar: var(--surface);
+  --color-sidebar-foreground: var(--foreground);
+  --color-sidebar-primary: var(--primary);
+  --color-sidebar-primary-foreground: var(--primary-foreground);
+  --color-sidebar-accent: var(--surface-2);
+  --color-sidebar-accent-foreground: var(--foreground);
+  --color-sidebar-border: var(--border);
+  --color-sidebar-ring: var(--ring);
+}
+
+:root {
+  --radius: 0.625rem;
+  --font-vazir: "Vazirmatn", ui-sans-serif, system-ui, sans-serif;
+
+  --background: oklch(0.14 0.021 265);
+  --foreground: oklch(0.95 0.017 250);
+
+  --surface: oklch(0.185 0.024 262);
+  --surface-2: oklch(0.225 0.028 259);
+
+  --card: oklch(0.2 0.025 261);
+  --card-foreground: oklch(0.95 0.017 250);
+  --popover: oklch(0.2 0.025 261);
+  --popover-foreground: oklch(0.95 0.017 250);
+
+  --primary: oklch(0.845 0.126 182);
+  --primary-foreground: oklch(0.14 0.021 265);
+
+  --secondary: oklch(0.26 0.03 259);
+  --secondary-foreground: oklch(0.95 0.017 250);
+
+  --muted: oklch(0.26 0.03 259);
+  --muted-foreground: oklch(0.66 0.045 255);
+
+  --accent: oklch(0.28 0.032 258);
+  --accent-foreground: oklch(0.95 0.017 250);
+
+  --destructive: oklch(0.7 0.16 26);
+  --destructive-foreground: oklch(0.14 0.021 265);
+
+  --warning: oklch(0.78 0.135 71);
+  --warning-foreground: oklch(0.14 0.021 265);
+
+  --ice: oklch(0.95 0.017 250);
+  --ice-dim: oklch(0.8 0.042 252);
+  --ice-faint: oklch(0.62 0.05 255);
+
+  --border: oklch(0.95 0.017 250 / 12%);
+  --input: oklch(0.95 0.017 250 / 14%);
+  --ring: oklch(0.845 0.126 182 / 55%);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-vazir);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background-color: color-mix(in oklab, var(--color-primary) 30%, transparent);
+  }
+}
+
+/* Panel glass surface used across cards, tables and drawers */
+@utility glass {
+  background-color: color-mix(in oklab, var(--color-foreground) 3%, transparent);
+  box-shadow: inset 0 0 0 1px var(--color-border);
+  backdrop-filter: blur(14px);
+}
+
+@utility glass-strong {
+  background-color: color-mix(in oklab, var(--color-surface) 94%, transparent);
+  box-shadow: inset 0 0 0 1px var(--color-border);
+  backdrop-filter: blur(24px);
+}
+
+@utility field {
+  width: 100%;
+  border-radius: var(--radius);
+  background-color: color-mix(in oklab, var(--color-foreground) 4%, transparent);
+  box-shadow: inset 0 0 0 1px var(--color-input);
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  color: var(--color-foreground);
+  outline: none;
+  &:focus {
+    box-shadow: inset 0 0 0 1px var(--color-ring);
+  }
+  &::placeholder {
+    color: var(--color-ice-faint);
+  }
+}
+
+@utility num {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Kinetic floating glass shards behind the shell */
+@utility shard {
+  position: absolute;
+  border-radius: 2rem;
+  background: linear-gradient(
+    135deg,
+    color-mix(in oklab, var(--color-primary) 12%, transparent),
+    transparent 65%
+  );
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--color-foreground) 6%, transparent);
+  filter: blur(2px);
+  animation: float-shard 13s ease-in-out infinite;
+}
+
+@keyframes float-shard {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(var(--shard-rotate, 0deg));
+  }
+  50% {
+    transform: translate3d(0, -26px, 0) rotate(var(--shard-rotate, 0deg));
+  }
+}
+
+@keyframes slide-in-start {
+  from {
+    transform: translateX(-101%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@utility slide-panel {
+  animation: slide-in-start 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+  .print-sheet {
+    box-shadow: none !important;
+    background: #fff !important;
+    color: #000 !important;
+  }
+}
